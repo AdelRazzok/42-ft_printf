@@ -9,5 +9,6 @@
 int	ft_printf(const char *format, ...);
 int	ft_handle_format(va_list *args, const char format);
 int	ft_print_char(int c);
+int	ft_print_str(char *str);
 
 #endif
