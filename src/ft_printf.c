@@ -9,6 +9,8 @@ int	ft_handle_format(va_list *args, const char format)
 		len += ft_print_char(va_arg(*args, int));
 	else if (format == 's')
 		len += ft_print_str(va_arg(*args, char *));
+	else if (format == 'p')
+		len += ft_print_ptr(va_arg(*args, void *));
 	else if (format == '%')
 		len += ft_print_char('%');
 	return (len);
@@ -40,7 +42,10 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int len = ft_printf("test est un %c%c, %s\n", 'b', 'g', "c'est trop !");
-	printf("printf len : %d\n", len);
+	int 	nb = 1243;
+	int	len = ft_printf("ft_printf : %p\n", &nb);
+
+	printf("len : %d\n", len);
+	printf("prtinf : %p", &nb);
 	return (0);
 }
