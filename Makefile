@@ -7,7 +7,7 @@ CC        = gcc
 CC_FLAGS  = -Wall -Werror -Wextra -I
 AR        = ar rcs
 
-SRC_FILES = # fichiers source
+SRC_FILES = ft_print_char ft_print_hexa ft_print_nbr ft_print_ptr ft_print_str ft_print_uint ft_printf
 
 SRC       = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ       = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -24,7 +24,7 @@ $(NAME):		$(OBJ)
 					@mv libft.a $(NAME)
 					@$(AR) $(NAME) $(OBJ)
 					@ranlib $(NAME)
-					@echo "libft compiled!"
+					@echo "libftprintf compiled!"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_CACHE)
 					@echo "Compiling $<"

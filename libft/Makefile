@@ -1,5 +1,5 @@
 NAME      = libft.a
-INCLUDES  = include/
+INCLUDES  = ../include/
 SRC_DIR   = src/
 OBJ_DIR   = obj/
 CC        = gcc
@@ -43,7 +43,7 @@ all:			$(NAME)
 $(NAME):		$(OBJ)
 					@$(AR) $(NAME) $(OBJ)
 					@ranlib $(NAME)
-					@echo "Libft compiled!"
+					@echo "libft compiled!"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_CACHE)
 					@echo "Compiling $<"
@@ -61,11 +61,11 @@ $(OBJ_CACHE):
 clean:
 					@rm -rf $(OBJ_DIR)
 					@rm -f $(OBJ_CACHE)
-					@echo "Libft objects files cleaned!"
+					@echo "libft objects files cleaned!"
 
 fclean:			clean
 					@rm -f $(NAME)
-					@echo "Libft executable files cleaned!"
+					@echo "libft executable files cleaned!"
 
 re:				fclean all
 					@echo "Cleaned and rebuilt everything for libft!"

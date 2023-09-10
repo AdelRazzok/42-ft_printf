@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
+/*   ft_print_hexa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arazzok <arazzok@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 14:07:02 by arazzok           #+#    #+#             */
-/*   Updated: 2023/08/17 13:39:38 by arazzok          ###   ########.fr       */
+/*   Created: 2023/07/25 10:41:18 by arazzok           #+#    #+#             */
+/*   Updated: 2023/07/25 12:31:34 by arazzok          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-static void	ft_put_ptr(uintptr_t ptr)
-{
-	if (ptr >= 16)
-	{
-		ft_put_ptr(ptr / 16);
-		ft_put_ptr(ptr % 16);
-	}
-	else
-	{
-		if (ptr <= 9)
-			ft_putchar_fd((ptr + '0'), 1);
-		else
-			ft_putchar_fd((ptr - 10 + 'a'), 1);
-	}
-}
-
-int	ft_printf_len(uintptr_t nb)
+int	ft_count_hexa(unsigned int nb)
 {
 	int	len;
 
@@ -42,20 +26,31 @@ int	ft_printf_len(uintptr_t nb)
 	return (len);
 }
 
-int	ft_print_ptr(uintptr_t ptr)
+static void	ft_put_hexa(unsigned int nb, const char format)
 {
-	int	len;
-
-	len = 0;
-	if (!ptr)
-		return (write(1, "(nil)", 5));
-	len += write(1, "0x", 2);
-	if (ptr == 0)
-		len += write(1, "0", 1);
+	if (nb >= 16)
+	{
+		ft_put_hexa(nb / 16, format);
+		ft_put_hexa(nb % 16, format);
+	}
 	else
 	{
-		ft_put_ptr(ptr);
-		len += ft_printf_len(ptr);
+		if (nb <= 9)
+			ft_putchar_fd((nb + '0'), 1);
+		else
+		{
+			if (format == 'x')
+				ft_putchar_fd((nb - 10 + 'a'), 1);
+			if (format == 'X')
+				ft_putchar_fd((nb - 10 + 'A'), 1);
+		}
 	}
-	return (len);
+}
+
+int	ft_print_hexa(unsigned int nb, const char format)
+{
+	if (nb == 0)
+		return (write(1, "0", 1));
+	ft_put_hexa(nb, format);
+	return (ft_count_hexa(nb));
 }
